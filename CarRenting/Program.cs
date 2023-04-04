@@ -12,7 +12,7 @@ namespace CarRenting
 
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            builder.Services.AddDbContext<CarRentingDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -26,7 +26,7 @@ namespace CarRenting
                     options.Password.RequireUppercase = false;
                 }
                 )
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<CarRentingDbContext>();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();

@@ -286,7 +286,7 @@ namespace CarRenting.Data.Migrations
                     b.HasOne("CarRenting.Data.Model.Category", "Category")
                         .WithMany("Cars")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Category");

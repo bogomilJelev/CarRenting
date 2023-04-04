@@ -1,6 +1,7 @@
 using CarRenting.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CarRenting
 {
@@ -48,8 +49,15 @@ namespace CarRenting
 
             app.MapDefaultControllerRoute();
             app.MapRazorPages();
-                        app.UseAuthentication();;
+            app.UseAuthentication();
             app.Run();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var dataContext = scope.ServiceProvider.GetRequiredService<CarRentingDbContext>();
+                dataContext.Database.Migrate();
+
+            }
         }
     }
 }
